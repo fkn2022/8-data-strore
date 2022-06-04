@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.eh.recyclerlistsample.CreateNoteActivity">
+
+    <EditText
+        android:id="@+id/et_title"
+        android:background="@android:color/holo_blue_dark"
+        android:textColor="@android:color/black"
+        android:hint="Title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <EditText
+        android:id="@+id/et_text"
+        android:hint="note text"
+        android:background="@android:color/holo_green_dark"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="120dp" />
+
+    <Spinner
+        android:id="@+id/categories"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+    </Spinner>
+
+    <Button
+        android:id="@+id/confirm"
+        android:text="OK"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+</LinearLayout>

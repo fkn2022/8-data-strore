@@ -37,9 +37,9 @@ class NoteAdapter : Adapter<NoteViewHolder>() {
     return notes.size
   }
 
-  fun updateNotes(notes: ArrayList<NoteModel>?) {
+  fun updateNotes(notes: List<NoteModel>) {
     this.notes.clear()
-    this.notes.addAll(notes!!)
+    this.notes.addAll(notes)
     notifyDataSetChanged() // обновляет все видимые элементы
   }
 

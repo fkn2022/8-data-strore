@@ -51,8 +51,10 @@ class MainActivity : AppCompatActivity() {
    * Загрузка заметок из базы даннх
    */
   private fun loadFromDatabase() {
-    val dbHelper = DatabaseHelper(this)
-    val notes = dbHelper.allNotes
-    adapter.updateNotes(notes)
+    val dbHelper = BaseApplication.instance.database
+    val notes = dbHelper.notesDao().getAll()
+    adapter.updateNotes(notes.map {
+      it.toModel()
+    })
   }
 }

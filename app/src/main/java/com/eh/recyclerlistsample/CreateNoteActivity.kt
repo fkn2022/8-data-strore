@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Spinner
 import com.eh.recyclerlistsample.R.id
 import com.eh.recyclerlistsample.R.layout
+import com.eh.recyclerlistsample.database.AppDatabase
+import com.eh.recyclerlistsample.database.note.NoteEntity
 import java.util.ArrayList
 
 class CreateNoteActivity : AppCompatActivity() {
@@ -16,7 +18,7 @@ class CreateNoteActivity : AppCompatActivity() {
   private lateinit var textInput: EditText
   private lateinit var spinner: Spinner
 
-  private lateinit var dbHelper: DatabaseHelper
+  private lateinit var dbHelper: AppDatabase
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +26,9 @@ class CreateNoteActivity : AppCompatActivity() {
     setContentView(layout.activity_create_note)
     titleInput = findViewById<View>(id.et_title) as EditText
     textInput = findViewById<View>(id.et_text) as EditText
-    dbHelper = DatabaseHelper(this)
+    dbHelper = BaseApplication.instance.database
     spinner = findViewById<View>(id.categories) as Spinner
-    val categories = dbHelper.categories
+    val categories = dbHelper.categoriesDao().getAll()
     val content = ArrayList<String?>()
     for (cat in categories) {
       content.add(cat.name)
@@ -45,13 +47,13 @@ class CreateNoteActivity : AppCompatActivity() {
     val title = titleInput.text.toString()
     val text = textInput.text.toString()
     val category = spinner.selectedItemPosition
-    val note = NoteModel(
+    val note = NoteEntity(
       title = title,
       text = text,
       date = System.currentTimeMillis(),
       categoryId = category
     )
-    dbHelper.createNote(note)
+    dbHelper.notesDao().insert(note)
     setResult(RESULT_OK)
     finish()
   }
